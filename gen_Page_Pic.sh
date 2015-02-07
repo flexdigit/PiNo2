@@ -9,37 +9,36 @@
 HTMLPAGE="/home/pi/Rasp_cam_mod/index.htm"
 CLIENT_TCP="/home/pi/Perlen/clnt_TCP.pl"
 
-echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">" > $HTMLPAGE
-echo "<html>"                           >> $HTMLPAGE
-echo "<head>"                           >> $HTMLPAGE
+echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">"        > $HTMLPAGE
+echo "<html>"                                                                  >> $HTMLPAGE
+echo "<head>"                                                                  >> $HTMLPAGE
 echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">" >> $HTMLPAGE
-echo "<title>Overview</title>"          >> $HTMLPAGE
+echo "<title>Overview</title>"                                                 >> $HTMLPAGE
 
-echo "<style type="text/css">"          >> $HTMLPAGE
-echo "*   {font-family: Courier; font-size:12; white-space:pre;}"          >> $HTMLPAGE
-echo "</style>"          >> $HTMLPAGE
+echo "<style type="text/css">"                                                 >> $HTMLPAGE
+echo "*   {font-family: Courier; font-size:12; white-space:pre;}"              >> $HTMLPAGE
+echo "</style>"                                                                >> $HTMLPAGE
 
-echo "</head>"                          >> $HTMLPAGE
-echo "<body>"                           >> $HTMLPAGE
-echo "Overview generated at"            >> $HTMLPAGE
-date '+%a %Y-%m-%d %H:%M'               >> $HTMLPAGE
+echo "</head>"                                                                 >> $HTMLPAGE
+echo "<body>"                                                                  >> $HTMLPAGE
+echo "Overview generated on" $HOSTNAME "at" `date '+%a %Y-%m-%d %H:%M'`        >> $HTMLPAGE
 #echo "    <p></p>"                      >> $HTMLPAGE
-echo ""                                 >> $HTMLPAGE
-echo "    <img src="tempday.png"> <img src="tempweek.png">"         >> $HTMLPAGE
+echo ""                                                                        >> $HTMLPAGE
+echo "    <img src="tempday.png"> <img src="tempweek.png">"                    >> $HTMLPAGE
 #echo "    <img src="tempweek.png">"		>> $HTMLPAGE
-echo "    <img src="solarday.png"> <img src="solarweek.png">"		>> $HTMLPAGE
+echo "    <img src="solarday.png"> <img src="solarweek.png">"                  >> $HTMLPAGE
 #echo "    <img src="solarweek.png">"    >> $HTMLPAGE
-echo ""                                 >> $HTMLPAGE
-echo "    <img src="image.jpg">"        >> $HTMLPAGE
-echo "	  <p></p>"                      >> $HTMLPAGE
+echo ""                                                                        >> $HTMLPAGE
+echo "    <img src="image.jpg">"                                               >> $HTMLPAGE
+echo "	  <p></p>"                                                             >> $HTMLPAGE
 
 # Start Tabelle
 #echo "<table border="1" frame="hsides" rules="all" style="font-family:Courier\; font-size:10\; white-space:pre\;" >" >> $HTMLPAGE
-echo "<table border="1" frame="hsides" rules="all" >"					>> $HTMLPAGE
+echo "<table border="2" frame="hsides" rules="all" >"				>> $HTMLPAGE
 
-echo "<caption><bold>Raspi</bold></caption>"							>> $HTMLPAGE
-echo "<tr>"                             >> $HTMLPAGE
-echo "<th bgcolor="#99CC33">No #1<br> (info is \"served\")</th>"        >> $HTMLPAGE
+echo "<caption><bold>Raspi</bold></caption>"						>> $HTMLPAGE
+echo "<tr>"                                                         >> $HTMLPAGE
+echo "<th bgcolor="#99CC33">No #1<br> (info is \"served\")</th>"    >> $HTMLPAGE
 echo "<th bgcolor="#99CC33">No #2</th>" >> $HTMLPAGE
 echo "</tr>"                            >> $HTMLPAGE
 
@@ -82,10 +81,10 @@ $CLIENT_TCP "vcgencmd measure_clock arm">> $HTMLPAGE
 $CLIENT_TCP "vcgencmd measure_clock core"           >> $HTMLPAGE
 echo "</td>"                            >> $HTMLPAGE
 echo "<td>"                             >> $HTMLPAGE
-vcgencmd measure_temp			>> $HTMLPAGE
-vcgencmd measure_volts			>> $HTMLPAGE
-vcgencmd measure_clock arm		>> $HTMLPAGE
-vcgencmd measure_clock core		>> $HTMLPAGE
+vcgencmd measure_temp                   >> $HTMLPAGE
+vcgencmd measure_volts                  >> $HTMLPAGE
+vcgencmd measure_clock arm              >> $HTMLPAGE
+vcgencmd measure_clock core             >> $HTMLPAGE
 echo "</td>"                            >> $HTMLPAGE
 echo "</tr>"                            >> $HTMLPAGE
 
@@ -97,12 +96,6 @@ echo ""                                 >> $HTMLPAGE
 echo ""                                 >> $HTMLPAGE
 echo "</body>"                          >> $HTMLPAGE
 echo "</html>"                          >> $HTMLPAGE
-
-
-#vcgencmd measure_temp					>> $HTMLPAGE
-#vcgencmd measure_volts					>> $HTMLPAGE
-#vcgencmd measure_clock arm				>> $HTMLPAGE
-
 
 ######################################
 # 
@@ -127,10 +120,11 @@ convert image.jpg -font $FONT -fill white -pointsize 10 -annotate 0x0+230+460 "$
 
 ######################################
 #
-# Bild kopieren und mit Datum und Uhrzeit versehen
+# Bild nach /home/pi/Rasp_cam_mod/archive
+# kopieren und mit Datum und Uhrzeit versehen
 #
 so=`date "+%Y%m%d_%H%M"`
-#cp image.jpg /home/pi/Rasp_cam_mod/archive/image_$so.jpg
+cp image.jpg /home/pi/Rasp_cam_mod/archive/image_$so.jpg
 
 
 ######################################
